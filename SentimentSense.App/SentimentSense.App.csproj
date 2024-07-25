@@ -10,4 +10,10 @@
       <PackageReference Include="Microsoft.ML" Version="4.0.0-preview.24271.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Components\Pages\Home.cs">
+        <DependentUpon>Home.razor</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
 </Project>
