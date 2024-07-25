@@ -6,4 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.ML" Version="4.0.0-preview.24271.1" />
+    </ItemGroup>
+
 </Project>
