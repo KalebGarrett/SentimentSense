@@ -6,3 +6,8 @@
 
 <p>Play around with my Sentiment Analyzer below:</p> 
 
+<div class="input-group w-50">
+  <textarea class="form-control" aria-label="With textarea" @bind="SentimentText"></textarea>
+</div>
+
+<button class="btn btn-primary mt-2" @onclick="AnalyzeSentiment">Analyze Text</button>
