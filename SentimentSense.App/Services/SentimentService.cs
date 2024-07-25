@@ -31,8 +31,8 @@ public class SentimentService : IMachineLearningService
 
     public ITransformer BuildAndTrainModel(IDataView splitTrainSet)
     {
-        var pipeline = _mlContext.Transforms.Concatenate(outputColumnName: "Features",
-                inputColumnNames: nameof(SentimentData.SentimentText))
+        var pipeline = _mlContext.Transforms.Text
+            .FeaturizeText(outputColumnName: "Features", inputColumnName: nameof(SentimentData.SentimentText))
             .Append(_mlContext.BinaryClassification.Trainers.SdcaLogisticRegression());
 
         var model = pipeline.Fit(splitTrainSet);
