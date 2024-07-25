@@ -5,6 +5,6 @@ namespace SentimentSense.App.Services.Interfaces;
 
 public interface IMachineLearningService
 {
-    TrainTestData LoadData(MLContext ctx);
-    ITransformer BuildAndTrainModel(MLContext mlContext, IDataView splitTrainSet);
+    TrainTestData LoadData();
+    ITransformer BuildAndTrainModel(IDataView splitTrainSet);
 }
