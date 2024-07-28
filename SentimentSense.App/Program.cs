@@ -1,3 +1,4 @@
+using Microsoft.ML;
 using SentimentSense.App.Components;
 using SentimentSense.App.Services;
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+builder.Services.AddScoped<MLContext>();
 builder.Services.AddScoped<SentimentService>();
 
 var app = builder.Build();

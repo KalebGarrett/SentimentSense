@@ -54,6 +54,7 @@ public class SentimentService : IMachineLearningService
         {
             SentimentText = sentimentText
         };
+        
         var resultPrediction = predictionEngine.Predict(sentimentData);
         return resultPrediction;
     }
