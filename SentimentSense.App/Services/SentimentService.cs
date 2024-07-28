@@ -1,4 +1,5 @@
 ﻿using Microsoft.ML;
+using Microsoft.ML.Data;
 using SentimentSense.App.Data.Constants;
 using SentimentSense.App.Data.Datasets;
 using SentimentSense.App.Services.Interfaces;
@@ -39,7 +40,14 @@ public class SentimentService : IMachineLearningService
         return model;
     }
 
-    public void UseModelWithSingleEntity(ITransformer model, string sentimentText)
+    public CalibratedBinaryClassificationMetrics EvaluateModel(ITransformer model, IDataView data)
+    {
+        var predictions = model.Transform(data);
+        var metrics = _mlContext.BinaryClassification.Evaluate(predictions);
+        return metrics;
+    }
+
+    public SentimentPrediction UseModelWithSingleEntity(ITransformer model, string sentimentText)
     {
         var predictionEngine = _mlContext.Model.CreatePredictionEngine<SentimentData, SentimentPrediction>(model);
         var sentimentData = new SentimentData()
@@ -47,11 +55,6 @@ public class SentimentService : IMachineLearningService
             SentimentText = sentimentText
         };
         var resultPrediction = predictionEngine.Predict(sentimentData);
-
-        Console.WriteLine
-        (resultPrediction.Prediction
-            ? $"Sentiment: {sentimentData.SentimentText} | Prediction: Positive"
-            : $"Sentiment: {sentimentData.SentimentText} | Prediction: Negative"
-        );
+        return resultPrediction;
     }
 }

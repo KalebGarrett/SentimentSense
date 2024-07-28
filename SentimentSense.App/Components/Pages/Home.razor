@@ -4,10 +4,21 @@
 
 <h1>Sentiment Sense</h1>
 
-<p>Play around with my Sentiment Analyzer below:</p> 
+<p class="mt-5">Play around with my Sentiment Analyzer below:</p>
 
-<div class="input-group w-50">
-  <textarea class="form-control" aria-label="With textarea" @bind="SentimentText"></textarea>
+<div class="row">
+    <div class="col-md-6">
+        <div class="input-group">
+            <textarea class="form-control" aria-label="With textarea" @bind="SentimentText"></textarea>
+        </div>
+
+        <button class="btn btn-primary mt-2" @onclick="AnalyzeSentiment">Analyze Text</button>
+        <p class="mt-2">Sentiment: @Sentiment</p>
+        <p>Probability: @Probablity</p>
+        <hr/>
+        <p class="mt2">Model quality metrics evaluation:</p>
+        <p class="mt2">@Accuracy</p>
+        <p class="mt2">@AreaUnderRocCurve</p>
+        <p class="mt2">@F1Score</p>
+    </div>
 </div>
-
-<button class="btn btn-primary mt-2" @onclick="AnalyzeSentiment">Analyze Text</button>
