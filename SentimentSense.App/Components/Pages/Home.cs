@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SentimentSense.App.Services;
-using SentimentSense.App.Services.Interfaces;
 
 namespace SentimentSense.App.Components.Pages;
 
@@ -10,10 +9,15 @@ public partial class Home
     private string SentimentText { get; set; }
     private string Sentiment { get; set; }
     private string Probability { get; set; }
-    private string Accuracy { get; set; }
-    private string AreaUnderRocCurve { get; set; }
-    private string F1Score { get; set; }
+    private static string Accuracy { get; set; }
+    private static string AreaUnderRocCurve { get; set; }
+    private static string F1Score { get; set; }
+    private int Index = -1;
+    private int DataSize { get; set; } = 3;
+    private double[] Data { get; set; } =
+        {Convert.ToDouble(Accuracy), Convert.ToDouble(AreaUnderRocCurve), Convert.ToDouble(F1Score)};
 
+    private string[] Labels { get; set; } = {"Accuracy", "AreaUnderRocCurve", "F1Score"};
 
     private void AnalyzeSentiment()
     {
@@ -29,5 +33,16 @@ public partial class Home
         Accuracy = $"Accuracy: {metrics.Accuracy:P2}";
         AreaUnderRocCurve = $"AreaUnderRocCurve: {metrics.AreaUnderRocCurve:P2}";
         F1Score = $"F1Score: {metrics.F1Score:P2}";
+        Console.WriteLine(Accuracy);
+    }
+
+    private void RandomizeData()
+    {
+        var random = new Random();
+        var new_data = new double[DataSize];
+        for (int i = 0; i < new_data.Length; i++)
+            new_data[i] = random.NextDouble() * 100;
+        Data = new_data;
+        StateHasChanged();
     }
 }

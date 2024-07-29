@@ -19,5 +19,11 @@
         <p>@Accuracy</p>
         <p>@AreaUnderRocCurve</p>
         <p>@F1Score</p>
+        <MudPaper Class="pa-4">
+            <MudChart ChartType="ChartType.Pie" InputData="@Data" @bind-SelectedIndex="Index" InputLabels="@Labels" Width="300px" Height="300px" />
+        </MudPaper>
+        <MudPaper Class="pa-4 mt-2 d-flex justify-center">
+            <MudButton @onclick="RandomizeData" Variant="Variant.Filled" Class="mx-4">Randomize</MudButton>
+        </MudPaper>
     </div>
 </div>
