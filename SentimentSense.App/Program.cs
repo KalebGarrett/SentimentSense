@@ -1,4 +1,5 @@
 using Microsoft.ML;
+using MudBlazor.Services;
 using SentimentSense.App.Components;
 using SentimentSense.App.Services;
 
@@ -9,6 +10,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddScoped<MLContext>();
 builder.Services.AddScoped<SentimentService>();
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 
