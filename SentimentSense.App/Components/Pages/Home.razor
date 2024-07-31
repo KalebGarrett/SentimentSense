@@ -2,28 +2,49 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Sentiment Sense</h1>
+<img src="imgs/sentiment_sense_logo.png" alt="Sentiment Sense" width="240" class="mx-auto d-block"/>
 
-<p class="mt-5">Play around with my Sentiment Analyzer below:</p>
-
-<div class="row">
+<div class="row gy-3 mt-3">
+    <h1>Free Sentiment Analysis </h1>
     <div class="col-md-6">
-        <div class="input-group">
-            <textarea class="form-control" aria-label="With textarea" @bind="SentimentText"></textarea>
-        </div>
+        <MudCard Style="background-color: #F8F8FF">
+            <MudCardContent>
+                <MudTextField Required="true" @bind-Value="SentimentText" Clearable="true" Style="background-color: #F8F8FF" Variant="Variant.Outlined" T="string" Label="Enter text here" Lines="5"/>
+                <MudButton Variant="Variant.Filled" @onclick="AnalyzeText" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Search" Class="mt-3">Analyze Text</MudButton>
+                <p class="mt-5 fw-bold">Sentiment: @Sentiment</p>
+                <MudRating SelectedValue="5" FullIcon="@Icons.Material.Filled.Square" EmptyIcon="@Icons.Material.Filled.Square" FullIconColor="FullColor" EmptyIconColor="Color.Dark"> </MudRating>
+                <hr/>
+                <p class="fw-bold">Probability: @Math.Round(Probability, 2)%</p>
+                <MudProgressLinear Color="Color.Tertiary" Striped="true" Size="Size.Large" Value="@Probability" Class="my-7"/>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </div>
+    <div class="col-md-6">
 
-        <button class="btn btn-primary mt-2" @onclick="AnalyzeSentiment">Analyze Text</button>
-        <p class="mt-2">Sentiment: @Sentiment</p>
-        <p>Probability: @Probability</p>
-        <p class="mt-5 fw-bold">Model quality metrics evaluation:</p>
-        <p>@Accuracy</p>
-        <p>@AreaUnderRocCurve</p>
-        <p>@F1Score</p>
-        <MudPaper Class="pa-4">
-            <MudChart ChartType="ChartType.Pie" InputData="@Data" @bind-SelectedIndex="Index" InputLabels="@Labels" Width="300px" Height="300px" />
+        <MudPaper Class="pa-4" Style="background-color: #F8F8FF">
+            <MudChart ChartType="ChartType.Pie" Style="background-color: #F8F8FF" InputData="@Data" @bind-SelectedIndex="Index" LegendPosition="LegendPosition" InputLabels="@Labels" Width="250px" Height="250px"/>
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-center text-center mt-2">
+                    <p class="fw-bold">Accuracy: @Math.Round(Accuracy, 2)%</p>
+                    <p class="fw-bold">AreaUnderRocCurve: @Math.Round(AreaUnderRocCurve, 2)%</p>
+                    <p class="fw-bold">F1Score: @Math.Round(F1Score, 2)% </p>
+                </div>
+            </div>
         </MudPaper>
-        <MudPaper Class="pa-4 mt-2 d-flex justify-center">
-            <MudButton @onclick="RandomizeData" Variant="Variant.Filled" Class="mx-4">Randomize</MudButton>
-        </MudPaper>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <MudSelect Label="Legend Position" Variant="Variant.Outlined" Dense="true" T="@Position" ValueChanged="OnSelectedValue" Style="background-color: #F8F8FF" Class="mt-4">
+                    <MudSelectItem T="Position" Value="Position.Top">Top</MudSelectItem>
+                    <MudSelectItem T="Position" Value="Position.Left">Left</MudSelectItem>
+                    <MudSelectItem T="Position" Value="Position.Right">Right</MudSelectItem>
+                    <MudSelectItem T="Position" Value="Position.Bottom">Bottom</MudSelectItem>
+                    <MudSelectItem T="Position" Value="Position.Start">Start</MudSelectItem>
+                    <MudSelectItem T="Position" Value="Position.End">End</MudSelectItem>
+                </MudSelect>
+            </div>
+        </div>
     </div>
 </div>
