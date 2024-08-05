@@ -1,17 +1,8 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Sentiment Sense</a>
-    </div>
-</div>
-
-<input type="checkbox" title="Navigation menu" class="navbar-toggler"/>
-
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-    </nav>
-</div>
+﻿<MudPaper MaxHeight="" Width="250px" Class="py-3" Elevation="0">
+    <MudNavMenu Color="Color.Transparent">
+        <MudImage class="ml-2" Width="180" Height="90" Src="imgs/sentiment_sense_logo_long.png" Alt="Sentiment Sense"></MudImage>
+        <MudDivider Class="my-2"/>
+        <MudNavLink Icon="@Icons.Material.Filled.Home" Href="">Home</MudNavLink>
+        <MudNavLink Icon="@Icons.Material.Filled.Info" Href="">More Info</MudNavLink>
+    </MudNavMenu>
+</MudPaper>
