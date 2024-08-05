@@ -9,17 +9,21 @@
     <div class="col-md-6">
         <MudCard Style="background-color: #F8F8FF">
             <MudCardContent>
-                <MudTextField Required="true" @bind-Value="SentimentText" Clearable="true" Style="background-color: #F8F8FF" Variant="Variant.Outlined" T="string" Label="Enter text here" Lines="5"/>
-                <MudButton Variant="Variant.Filled" @onclick="AnalyzeText" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Search" Class="mt-3">Analyze Text</MudButton>
+                <MudTextField @bind-Value="SentimentText" Clearable="true" Style="background-color: #F8F8FF" Variant="Variant.Outlined" T="string" Label="Enter text here" Lines="5"/>
+                @if (string.IsNullOrEmpty(SentimentText))
+                {
+                    <MudButton Disabled="true" Variant="Variant.Filled" @onclick="AnalyzeText" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Search" Class="mt-3">Analyze Text</MudButton>
+                }
+                else
+                {
+                    <MudButton Disabled="false" Variant="Variant.Filled" @onclick="AnalyzeText" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Search" Class="mt-3">Analyze Text</MudButton>
+                }
                 <p class="mt-5 fw-bold">Sentiment: @Sentiment</p>
                 <MudRating SelectedValue="5" FullIcon="@Icons.Material.Filled.Square" EmptyIcon="@Icons.Material.Filled.Square" FullIconColor="FullColor" EmptyIconColor="Color.Dark"> </MudRating>
                 <hr/>
                 <p class="fw-bold">Probability: @Math.Round(Probability, 2)%</p>
                 <MudProgressLinear Color="Color.Tertiary" Striped="true" Size="Size.Large" Value="@Probability" Class="my-7"/>
             </MudCardContent>
-            <MudCardActions>
-                <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
-            </MudCardActions>
         </MudCard>
     </div>
     <div class="col-md-6">

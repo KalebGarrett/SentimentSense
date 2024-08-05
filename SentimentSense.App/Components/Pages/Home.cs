@@ -13,8 +13,7 @@ public partial class Home
     private static double Accuracy { get; set; }
     private static double AreaUnderRocCurve { get; set; }
     private static double F1Score { get; set; }
-    private int Index = -1;
-    private int DataSize { get; set; } = 3;
+    private int Index { get; set; } = -1;
     private double[] Data { get; set; } 
     private string[] Labels { get; set; } = {"Accuracy", "AreaUnderRocCurve", "F1Score"};
     private Position LegendPosition { get; set; } = Position.Bottom;
