@@ -6,11 +6,11 @@
 <MudSnackbarProvider/>
 
 <MudLayout>
-    <MudAppBar>
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" OnClick="@((e) => DrawerToggle())" />
-        <MudIconButton class="overflow-visible" Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Href="https://github.com/KalebGarrett/SentimentSense" target="_blank" Size="Size.Medium"></MudIconButton>
+    <MudAppBar Color="Color.Transparent">
+        <MudIconButton Class="visible-md" Icon="@Icons.Material.Filled.Menu" Color="Color.Primary" OnClick="@((e) => DrawerToggle())"/>
+        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Primary" Href="https://github.com/KalebGarrett/SentimentSense" target="_blank" Size="Size.Medium"></MudIconButton>
     </MudAppBar>
-    <MudDrawer @bind-Open="DrawerOpen">
+    <MudDrawer style="background-color: #594AE2" @bind-Open="DrawerOpen">
         <NavMenu/>
     </MudDrawer>
     <MudMainContent>
@@ -21,7 +21,7 @@
 </MudLayout>
 
 @code {
-    bool DrawerOpen { get; set; }= true;
+    bool DrawerOpen { get; set; } = true;
 
     void DrawerToggle()
     {
