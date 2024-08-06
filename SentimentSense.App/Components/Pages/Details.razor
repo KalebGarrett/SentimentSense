@@ -1,0 +1,48 @@
+﻿@page "/Details"
+
+<PageTitle>Details</PageTitle>
+
+<div class="row">
+    <div class="col-md-6">
+        <MudText Class="mt-4" Typo="Typo.h4"><MudIcon Size="Size.Large" Color="Color.Info" Icon="@Icons.Material.Filled.LaptopChromebook"/> Overview</MudText>
+        <MudText Class="mt-2 ml-5">
+            This complimentary tool enables you to perform sentiment analysis on almost any text written in English.
+            It calculates a sentiment score that represents the overall sentiment, tone, or emotional nuance of your
+            input text.
+        </MudText>
+        <MudText Class="mt-6" Typo="Typo.h4"><MudIcon Size="Size.Large" Color="Color.Info" Icon="@Icons.Material.Filled.Book"/> Definitions</MudText>
+        <MudText>
+            <ul class="ml-5">
+                <li class="mt-2">
+                    <span class="fw-bold">Sentiment: </span>In machine learning, sentiment refers to the identification and extraction of subjective information from text,
+                    such as opinions, emotions, and attitudes. It often involves classifying text as positive, negative, or neutral.
+                </li>
+                <li class="mt-2">
+                    <span class="fw-bold">Probability: </span>Probability in machine learning is the measure of the likelihood that a given event will occur. In classification tasks,
+                    it often refers to the likelihood that a particular instance belongs to a specific class.
+                </li>
+                <li class="mt-2">
+                    <span class="fw-bold">Accuracy: </span>Accuracy is a metric for evaluating classification models. It is the ratio of correctly predicted instances to the total instances in the dataset.
+                    It is calculated as:
+                    <br/><br/>
+                    Accuracy = <sup>Total Number of Predictions</sup>&frasl;<sub>Number of Correct Predictions</sub>
+                </li>
+                <li class="mt-2">
+                    <span class="fw-bold">Under ROC Curve (AUC): </span>The Area Under the Receiver Operating Characteristic Curve (AUC-ROC) is a performance metric for binary classification problems.
+                    It represents the ability of the model to distinguish between positive and negative classes. A higher AUC indicates a better performing model.
+                </li>
+                <li class="mt-2">
+                    <span class="fw-bold">F1 Score: </span>The F1 Score is a measure of a test's accuracy. It considers both precision (the accuracy of the positive predictions) and recall (the ability to find all positive instances).
+                    The F1 Score is the harmonic mean of precision and recall. It is calculated as:
+                    <br/><br/>
+                    F1 Score = 2 x <sup>Precision X Recall </sup>&frasl;<sub>Precision + Recall</sub>
+                </li>
+            </ul>
+        </MudText>
+        <MudText Class="mt-6" Typo="Typo.h4"><MudIcon Size="Size.Large" Color="Color.Info" Icon="@Icons.Material.Filled.Info"/> About</MudText>
+        <MudText Class="mt-2 ml-5">
+            Sentiment Sense leverages computational linguistics and text mining techniques to automatically determine the sentiment or emotional tone of the text being analyzed. By applying advanced machine learning algorithms,
+            the tool evaluates various aspects of the text, including word choice, context, and overall tone, to produce a sentiment score.
+        </MudText>
+    </div>
+</div>
