@@ -5,11 +5,11 @@ namespace SentimentSense.API.Repositories.Interfaces;
 
 public interface IMongoRepository
 {
-    public Task<IEnumerable<BaseModel>> FindAll();
-    public Task<BaseModel> FindById(string id);
-    public Task<BaseModel> InsertOne(BaseModel data);
-    public Task<BaseModel> InsertMany(ICollection<BaseModel> documents);
-    public Task<BaseModel> ReplaceOne(string id, BaseModel data);
-    public Task<BaseModel> DeleteById(string id, bool hardDelete = false);
-    public Task<BaseModel> DeleteMany(Expression<Func<BaseModel, bool>> filterExpression);
+    public Task<IEnumerable<MlModel>> FindAll();
+    public Task<MlModel> FindById(string id);
+    public Task<MlModel> InsertOne(MlModel data);
+    public Task<MlModel> InsertMany(ICollection<MlModel> documents);
+    public Task<MlModel> ReplaceOne(string id, MlModel data);
+    public Task<MlModel> DeleteById(string id, bool hardDelete = false);
+    public Task<MlModel> DeleteMany(Expression<Func<MlModel, bool>> filterExpression);
 }
