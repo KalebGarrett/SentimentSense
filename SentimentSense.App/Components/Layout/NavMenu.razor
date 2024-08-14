@@ -1,8 +1,14 @@
 ﻿<MudPaper Style="background-color: #594AE2" Width="240px" Class="py-3" Elevation="0">
-    <MudNavMenu Color="Color.Secondary" Bordered="true" Rounded="true" Margin="Margin.Normal" Class="pa-2">
+    <MudNavMenu Color="Color.Warning" Bordered="true" Rounded="true" Margin="Margin.Normal" Class="pa-2">
         <MudImage class="ml-4" Width="180" Height="90" Src="imgs/sentiment_sense_logo_long2.png" Alt="Sentiment Sense"></MudImage>
         <MudDivider Class="my-2"/>
-        <MudNavLink IconColor="Color.Inherit" Style="color: white" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home" Href="">Home</MudNavLink>
-        <MudNavLink IconColor="Color.Inherit" Style="color: white"  Icon="@Icons.Material.Filled.Info" Href="details">Details</MudNavLink>
+        <MudNavLink Class="mud-item" IconColor="Color.Inherit" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home" Href="">Home</MudNavLink>
+        <MudNavLink Class="mud-item" IconColor="Color.Inherit" Icon="@Icons.Material.Filled.Info" Href="details">Details</MudNavLink>
     </MudNavMenu>
 </MudPaper>
+
+<style>
+    .mud-item{
+        color: #ffffff !important; 
+    }
+</style>

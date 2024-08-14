@@ -21,6 +21,18 @@
         </MudContainer>
     </MudMainContent>
 </MudLayout>
+<footer class="footer">
+    <div class="container d-flex justify-content-center">
+        <div class="d-flex row text-center">
+            <MudText Class="col-6 col-auto col-sm-auto col-md-auto col-md-large">
+                Powered by .NET @Environment.Version
+            </MudText>
+            <MudText Class="col-6 col-auto col-sm-auto col-md-auto col-md-large">
+                &copy; @DateTime.UtcNow.Year Sentiment Sense
+            </MudText>
+        </div>
+    </div>
+</footer>
 
 @code {
     bool DrawerOpen { get; set; } = true;
@@ -29,4 +41,5 @@
     {
         DrawerOpen = !DrawerOpen;
     }
+
 }
