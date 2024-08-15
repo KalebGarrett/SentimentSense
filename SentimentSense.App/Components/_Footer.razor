@@ -1,12 +1,21 @@
-﻿<footer>
-    <div class="container my-auto d-flex justify-content-center">
+﻿<footer class="footer-position">
+    <div class="container">
         <div class="row text-center">
-            <MudText Class="col-6 col-auto col-sm-auto col-md-auto col-md-large">
-                Powered by .NET @Environment.Version
-            </MudText>
-            <MudText Class="col-6 col-auto col-sm-auto col-md-auto col-md-large">
-                &copy; @DateTime.UtcNow.Year Sentiment Sense
-            </MudText>
+            <MudText Class="col-6">Powered by .NET @DotNetVersion</MudText>
+            <MudText Class="col-6">&copy; @CurrentYear Sentiment Sense</MudText>
         </div>
     </div>
 </footer>
+
+<style>
+    .footer-position {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+
+@code {
+    private Version DotNetVersion { get; set; } = Environment.Version;
+    private int CurrentYear { get; set; } = DateTime.UtcNow.Year;
+}
