@@ -26,15 +26,12 @@
         </MudCard>
     </div>
     <div class="col-md-6">
-
         <MudPaper Class="pa-4" Style="background-color: #F8F9FC">
             <MudChart ChartType="ChartType.Pie" Style="background-color: #F8F8FF" InputData="@Data" @bind-SelectedIndex="Index" LegendPosition="LegendPosition" InputLabels="@Labels" Width="250px" Height="250px"/>
-            <div class="row">
-                <div class="col-md-12 d-flex justify-content-center text-center mt-2">
-                    <p class="fw-bold">Accuracy: @Math.Round(Accuracy, 2)%</p>
-                    <p class="fw-bold">AreaUnderRocCurve: @Math.Round(AreaUnderRocCurve, 2)%</p>
-                    <p class="fw-bold">F1Score: @Math.Round(F1Score, 2)% </p>
-                </div>
+            <div class="row d-flex text-center mt-2">
+                <p class="col-4 fw-bold">Accuracy: @Math.Round(Accuracy, 2)%</p>
+                <p class="col-4 fw-bold">AreaUnderRocCurve: @Math.Round(AreaUnderRocCurve, 2)%</p>
+                <p class="col-4 fw-bold">F1Score: @Math.Round(F1Score, 2)%</p>
             </div>
         </MudPaper>
         <div class="row mb-3">
