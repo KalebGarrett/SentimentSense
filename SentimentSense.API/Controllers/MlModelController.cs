@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SentimentSense.API.Repositories.Interfaces;
 using SentimentSense.Models;
@@ -20,7 +15,8 @@ namespace SentimentSense.API.Controllers
             _MongoRepository = mongoRepository;
         }
 
-        [HttpGet("")] public async Task<IActionResult> Get()
+        [HttpGet("")]
+        public async Task<IActionResult> Get()
         {
             var models = await _MongoRepository.FindAll();
 
@@ -28,11 +24,12 @@ namespace SentimentSense.API.Controllers
             {
                 return NoContent();
             }
-            
+
             return Ok(models);
         }
-        
-        [HttpGet("{id}")] public async Task<IActionResult> Get(string id)
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(string id)
         {
             var model = await _MongoRepository.FindById(id);
 
@@ -40,10 +37,10 @@ namespace SentimentSense.API.Controllers
             {
                 return NotFound();
             }
-            
+
             return Ok(model);
         }
-        
+
         [HttpPost("")]
         public async Task<IActionResult> Create(MlModel model)
         {
@@ -51,23 +48,30 @@ namespace SentimentSense.API.Controllers
             return Created(model.Id, model);
         }
 
-        // Fix
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, MlModel model)
         {
             model = await _MongoRepository.ReplaceOne(id, model);
 
-           
+            if (model.Id != id)
+            {
+                return NotFound();
+            }
 
-            return NoContent();
+            return Ok();
         }
-        
-        
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            await _MongoRepository.DeleteById(id);
-            return NoContent();
+            var deleteResult = await _MongoRepository.DeleteById(id);
+
+            if (deleteResult.DeletedCount == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok();
         }
     }
 }

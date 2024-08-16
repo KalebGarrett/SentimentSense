@@ -32,7 +32,7 @@ public class MlModelRepository : IMongoRepository<MlModel>
         data.Id = Guid.NewGuid().ToString();
         data.CreatedAt = DateTime.UtcNow;
         data.UpdatedAt = DateTime.UtcNow;
-        data.DtoVersion = 1;
+        data.DtoVersion += 1;
         await GetCollection().InsertOneAsync(data);
         var mlModelList = await GetCollection().AsQueryable().ToListAsync();
         return mlModelList.FirstOrDefault(x => x.Id == data.Id)!;
@@ -42,19 +42,19 @@ public class MlModelRepository : IMongoRepository<MlModel>
     {
         throw new NotImplementedException();
     }
-
-    // Fix
+    
     public async Task<MlModel> ReplaceOne(string id, MlModel data)
     {
         data.UpdatedAt = DateTime.UtcNow;
-        data.DtoVersion = data.DtoVersion++;
-        await GetCollection().ReplaceOneAsync(id, data);
+        data.DtoVersion += 1;
+        await GetCollection().ReplaceOneAsync(x  => x.Id == id, data);
         return data;
     }
 
-    public async Task DeleteById(string id)
+    public async Task<DeleteResult> DeleteById(string id)
     {
-        await GetCollection().DeleteOneAsync(x => x.Id == id);
+       var deleteResult = await GetCollection().DeleteOneAsync(x => x.Id == id);
+       return deleteResult;
     }
 
     public Task DeleteMany(Expression<Func<MlModel, bool>> filterExpression)
