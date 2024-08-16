@@ -5,7 +5,7 @@ using SentimentSense.Models;
 
 namespace SentimentSense.API.Repositories;
 
-public class MlModelRepository : IMongoRepository
+public class MlModelRepository : IMongoRepository<MlModel>
 {
     private readonly IMongoClient _mongoClient;
 
@@ -20,9 +20,11 @@ public class MlModelRepository : IMongoRepository
         return models;
     }
 
+    // Fix
     public async Task<MlModel> FindById(string id)
     {
-        throw new NotImplementedException();
+        var model = await GetCollection().UpdateOne()
+        return model;
     }
 
     public async Task<MlModel> InsertOne(MlModel data)
@@ -30,9 +32,10 @@ public class MlModelRepository : IMongoRepository
         data.Id = Guid.NewGuid().ToString();
         data.CreatedAt = DateTime.UtcNow;
         data.UpdatedAt = DateTime.UtcNow;
+        data.DtoVersion = 1;
         await GetCollection().InsertOneAsync(data);
         var mlModelList = await GetCollection().AsQueryable().ToListAsync();
-        return mlModelList.FirstOrDefault(x => x.Id == data.Id);
+        return mlModelList.FirstOrDefault(x => x.Id == data.Id)!;
     }
 
     public Task<MlModel> InsertMany(ICollection<MlModel> documents)
@@ -40,17 +43,21 @@ public class MlModelRepository : IMongoRepository
         throw new NotImplementedException();
     }
 
-    public Task<MlModel> ReplaceOne(string id, MlModel data)
+    // Fix
+    public async Task<MlModel> ReplaceOne(string id, MlModel data)
     {
-        throw new NotImplementedException();
+        data.UpdatedAt = DateTime.UtcNow;
+        data.DtoVersion = data.DtoVersion++;
+        await GetCollection().ReplaceOneAsync(id, data);
+        return data;
     }
 
-    public Task<MlModel> DeleteById(string id)
+    public async Task DeleteById(string id)
     {
-        throw new NotImplementedException();
+        await GetCollection().DeleteOneAsync(x => x.Id == id);
     }
 
-    public Task<MlModel> DeleteMany(Expression<Func<MlModel, bool>> filterExpression)
+    public Task DeleteMany(Expression<Func<MlModel, bool>> filterExpression)
     {
         throw new NotImplementedException();
     }
