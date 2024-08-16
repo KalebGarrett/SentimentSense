@@ -32,11 +32,16 @@ namespace SentimentSense.API.Controllers
             return Ok(models);
         }
         
-        // Fix
         [HttpGet("{id}")] public async Task<IActionResult> Get(string id)
         {
-            await _MongoRepository.FindById(id);
-            return Ok();
+            var model = await _MongoRepository.FindById(id);
+
+            if (model == null)
+            {
+                return NotFound();
+            }
+            
+            return Ok(model);
         }
         
         [HttpPost("")]
@@ -52,10 +57,7 @@ namespace SentimentSense.API.Controllers
         {
             model = await _MongoRepository.ReplaceOne(id, model);
 
-            if (id != model.Id)
-            {
-                return BadRequest();
-            }
+           
 
             return NoContent();
         }

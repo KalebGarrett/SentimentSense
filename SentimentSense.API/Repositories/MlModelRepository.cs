@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using SentimentSense.API.Repositories.Interfaces;
 using SentimentSense.Models;
 
@@ -19,11 +20,10 @@ public class MlModelRepository : IMongoRepository<MlModel>
         var models = await GetCollection().AsQueryable().ToListAsync();
         return models;
     }
-
-    // Fix
+    
     public async Task<MlModel> FindById(string id)
     {
-        var model = await GetCollection().UpdateOne()
+        var model = await GetCollection().AsQueryable().FirstOrDefaultAsync(x => x.Id == id);
         return model;
     }
 
@@ -61,7 +61,7 @@ public class MlModelRepository : IMongoRepository<MlModel>
     {
         throw new NotImplementedException();
     }
-    
+
     private IMongoCollection<MlModel> GetCollection()
     {
         var db = _mongoClient.GetDatabase("SentimentSense");
