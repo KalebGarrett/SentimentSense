@@ -1,0 +1,13 @@
+﻿<footer class="footer mt-5 mb-5">
+    <div class="container">
+        <div class="row text-center">
+            <MudText Class="col-6">Powered by .NET @DotNetVersion</MudText>
+            <MudText Class="col-6">&copy; @CurrentYear Sentiment Sense</MudText>
+        </div>
+    </div>
+</footer>
+
+@code {
+    private Version DotNetVersion { get; set; } = Environment.Version;
+    private int CurrentYear { get; set; } = DateTime.UtcNow.Year;
+}
