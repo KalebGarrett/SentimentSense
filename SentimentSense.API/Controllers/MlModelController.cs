@@ -8,17 +8,17 @@ namespace SentimentSense.API.Controllers
     [ApiController]
     public class MlModelController : ControllerBase
     {
-        public readonly IMongoRepository<MlModel> _MongoRepository;
+        public readonly IMongoRepository<MlModel> _MlModelRepository;
 
         public MlModelController(IMongoRepository<MlModel> mongoRepository)
         {
-            _MongoRepository = mongoRepository;
+            _MlModelRepository = mongoRepository;
         }
 
         [HttpGet("")]
         public async Task<IActionResult> Get()
         {
-            var models = await _MongoRepository.FindAll();
+            var models = await _MlModelRepository.FindAll();
 
             if (!models.Any())
             {
@@ -31,7 +31,7 @@ namespace SentimentSense.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            var model = await _MongoRepository.FindById(id);
+            var model = await _MlModelRepository.FindById(id);
 
             if (model == null)
             {
@@ -42,16 +42,16 @@ namespace SentimentSense.API.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> Create(MlModel model)
+        public async Task<IActionResult> Create([FromForm] MlModel model)
         {
-            model = await _MongoRepository.InsertOne(model);
+            model = await _MlModelRepository.InsertOne(model);
             return Created(model.Id, model);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, MlModel model)
         {
-            model = await _MongoRepository.ReplaceOne(id, model);
+            model = await _MlModelRepository.ReplaceOne(id, model);
 
             if (model.Id != id)
             {
@@ -64,7 +64,7 @@ namespace SentimentSense.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            var deleteResult = await _MongoRepository.DeleteById(id);
+            var deleteResult = await _MlModelRepository.DeleteById(id);
 
             if (deleteResult.DeletedCount == 0)
             {

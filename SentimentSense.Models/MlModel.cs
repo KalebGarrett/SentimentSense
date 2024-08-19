@@ -1,9 +1,9 @@
 ﻿using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Http;
 
 namespace SentimentSense.Models;
 
 public class MlModel : BaseModel
 {
-    //public byte[] Model { get; set; }
-    [JsonPropertyName("model")] public string Model { get; set; }
+    [JsonPropertyName("model")] public IFormFile Model { get; set; }
 }

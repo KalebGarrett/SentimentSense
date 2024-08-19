@@ -37,7 +37,7 @@ public class MlModelRepository : IMongoRepository<MlModel>
         var mlModelList = await GetCollection().AsQueryable().ToListAsync();
         return mlModelList.FirstOrDefault(x => x.Id == data.Id)!;
     }
-
+    
     public Task<MlModel> InsertMany(ICollection<MlModel> documents)
     {
         throw new NotImplementedException();
