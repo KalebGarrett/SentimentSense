@@ -2,13 +2,18 @@
     <MudNavMenu Color="Color.Warning" Bordered="true" Rounded="true" Margin="Margin.Normal" Class="pa-2">
         <MudImage class="ml-4" Width="180" Height="90" Src="imgs/sentiment_sense_logo_long2.png" Alt="Sentiment Sense"></MudImage>
         <MudDivider Class="my-2"/>
-        <MudNavLink Class="mud-item" IconColor="Color.Inherit" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home" Href="">Home</MudNavLink>
-        <MudNavLink Class="mud-item" IconColor="Color.Inherit" Icon="@Icons.Material.Filled.Info" Href="details">Details</MudNavLink>
+        <MudNavLink Class="mud-link-item" Match="NavLinkMatch.All" IconColor="Color.Inherit" Icon="@Icons.Material.Filled.Home" Href="">Home</MudNavLink>
+        <MudNavLink Class="mud-link-item" IconColor="Color.Inherit" Icon="@Icons.Material.Filled.Info" Href="details">Details</MudNavLink>
     </MudNavMenu>
 </MudPaper>
 
 <style>
-    .mud-item{
-        color: #ffffff !important; 
+    .mud-link-item{
+        color: #ffffff; 
+    }
+
+    .mud-link-item :hover {
+        color: #ffffff !important;
+        font-weight: bold;
     }
 </style>
