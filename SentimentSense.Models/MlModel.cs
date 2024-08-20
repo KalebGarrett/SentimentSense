@@ -5,5 +5,5 @@ namespace SentimentSense.Models;
 
 public class MlModel : BaseModel
 {
-    [JsonPropertyName("model")] public IFormFile Model { get; set; }
+    [JsonPropertyName("model")] public string ModelFileName { get; set; }
 }

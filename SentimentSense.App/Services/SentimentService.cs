@@ -32,11 +32,26 @@ public class SentimentService : IMachineLearningService
 
     public ITransformer BuildAndTrainModel(IDataView splitTrainSet)
     {
-        var pipeline = _mlContext.Transforms.Text
-            .FeaturizeText(outputColumnName: "Features", inputColumnName: nameof(SentimentData.SentimentText))
-            .Append(_mlContext.BinaryClassification.Trainers.SdcaLogisticRegression());
+        ITransformer model;
 
-        var model = pipeline.Fit(splitTrainSet);
+        if (!File.Exists(@"D:\\repos\\SentimentSense\\SentimentSense.App\\MlModels\\sentimentsensemodel.zip"))
+        {
+            var pipeline = _mlContext.Transforms.Text
+                .FeaturizeText(outputColumnName: "Features", inputColumnName: nameof(SentimentData.SentimentText))
+                .Append(_mlContext.BinaryClassification.Trainers.SdcaLogisticRegression());
+
+            model = pipeline.Fit(splitTrainSet);
+            _mlContext.Model.Save(model, splitTrainSet.Schema,
+                @"D:\\repos\\SentimentSense\\SentimentSense.App\\MlModels\\sentimentsensemodel.zip");
+            return model;
+        }
+
+        model = _mlContext.Model.Load
+        (
+            @"D:\\repos\\SentimentSense\\SentimentSense.App\\MlModels\\sentimentsensemodel.zip",
+            out _
+        );
+
         return model;
     }
 
@@ -54,7 +69,7 @@ public class SentimentService : IMachineLearningService
         {
             SentimentText = sentimentText
         };
-        
+
         var resultPrediction = predictionEngine.Predict(sentimentData);
         return resultPrediction;
     }

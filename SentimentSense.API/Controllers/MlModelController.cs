@@ -42,7 +42,7 @@ namespace SentimentSense.API.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> Create([FromForm] MlModel model)
+        public async Task<IActionResult> Create(MlModel model)
         {
             model = await _MlModelRepository.InsertOne(model);
             return Created(model.Id, model);
