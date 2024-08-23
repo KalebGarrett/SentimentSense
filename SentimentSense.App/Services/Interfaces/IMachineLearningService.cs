@@ -6,7 +6,8 @@ namespace SentimentSense.App.Services.Interfaces;
 
 public interface IMachineLearningService
 {
-    TrainTestData LoadData();
+    TrainTestData LoadFromTextFile();
+    TrainTestData LoadFromEnumerable();
     ITransformer BuildAndTrainModel(IDataView splitTrainSet);
     CalibratedBinaryClassificationMetrics EvaluateModel(ITransformer model, IDataView data);
 }

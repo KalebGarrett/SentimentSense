@@ -16,7 +16,7 @@ public class SentimentService : IMachineLearningService
         _mlContext = context;
     }
 
-    public TrainTestData LoadData()
+    public TrainTestData LoadFromTextFile()
     {
         var dataView =
             _mlContext.Data.LoadFromTextFile<SentimentData>
@@ -30,11 +30,16 @@ public class SentimentService : IMachineLearningService
         return splitDataView;
     }
 
+    public TrainTestData LoadFromEnumerable()
+    {
+        throw new NotImplementedException();
+    }
+
     public ITransformer BuildAndTrainModel(IDataView splitTrainSet)
     {
         ITransformer model;
 
-        if (!File.Exists(@"D:\\repos\\SentimentSense\\SentimentSense.App\\MlModels\\sentimentsensemodel.zip"))
+        if (!File.Exists("MlModels/sentimentsensemodel.zip"))
         {
             var pipeline = _mlContext.Transforms.Text
                 .FeaturizeText(outputColumnName: "Features", inputColumnName: nameof(SentimentData.SentimentText))
@@ -42,13 +47,13 @@ public class SentimentService : IMachineLearningService
 
             model = pipeline.Fit(splitTrainSet);
             _mlContext.Model.Save(model, splitTrainSet.Schema,
-                @"D:\\repos\\SentimentSense\\SentimentSense.App\\MlModels\\sentimentsensemodel.zip");
+                "MlModels/sentimentsensemodel.zip");
             return model;
         }
 
         model = _mlContext.Model.Load
         (
-            @"D:\\repos\\SentimentSense\\SentimentSense.App\\MlModels\\sentimentsensemodel.zip",
+            "MlModels/sentimentsensemodel.zip",
             out _
         );
 

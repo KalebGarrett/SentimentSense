@@ -2,6 +2,5 @@
 
 public class FilePath
 {
-    public const string SentimentDataCsv 
-        = @"D:\repos\SentimentSense\SentimentSense.App\Data\Docs\sentiment_data.csv";
+    public const string SentimentDataCsv = "Data/Docs/sentiment_data.csv";
 }

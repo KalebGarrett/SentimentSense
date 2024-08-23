@@ -28,7 +28,7 @@ public partial class Home
     
     private void AnalyzeText()
     {
-        var trainingData = SentimentService.LoadData().TrainSet;
+        var trainingData = SentimentService.LoadFromTextFile().TrainSet;
         var model = SentimentService.BuildAndTrainModel(trainingData);
 
         var resultPrediction = SentimentService.UseModelWithSingleEntity(model, SentimentText);
@@ -37,7 +37,7 @@ public partial class Home
   
         FullColor = resultPrediction.Prediction ? Color.Tertiary : Color.Secondary;
 
-        var testData = SentimentService.LoadData().TestSet;
+        var testData = SentimentService.LoadFromTextFile().TestSet;
         var metrics = SentimentService.EvaluateModel(model, testData);
         Accuracy = metrics.Accuracy * 100;
         AreaUnderRocCurve = metrics.AreaUnderRocCurve * 100;
