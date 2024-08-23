@@ -24,9 +24,9 @@ A web app for analyzing and visualizing the sentiment of text data. Sentiment Se
 If you want to deploy your own web app for an affordable price, consider using a platform like [DigitalOcean](https://www.digitalocean.com).
 
 ## Stats
-![Alt](https://repobeats.axiom.co/api/embed/b8f7e490cb4a6378da05c85b6b5c55c7cd279c29.svg "Repobeats analytics image"))
+![Alt](https://repobeats.axiom.co/api/embed/b8f7e490cb4a6378da05c85b6b5c55c7cd279c29.svg "Repobeats analytics image")
 
 
 ## Screenshots
 
-![image](/Documentation/Images/home-page.png)
+![image](/Documentation/Images/home-pg.png)
