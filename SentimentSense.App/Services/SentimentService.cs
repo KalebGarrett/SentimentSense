@@ -1,4 +1,6 @@
-﻿using Microsoft.ML;
+﻿using System.Net;
+using Amazon.S3;
+using Microsoft.ML;
 using Microsoft.ML.Data;
 using SentimentSense.App.Data.Constants;
 using SentimentSense.App.Data.Datasets;
@@ -35,7 +37,7 @@ public class SentimentService : IMachineLearningService
         throw new NotImplementedException();
     }
 
-    public ITransformer BuildAndTrainModel(IDataView splitTrainSet)
+    public ITransformer BuildOrLoadModelLocally(IDataView splitTrainSet)
     {
         ITransformer model;
 
@@ -56,10 +58,46 @@ public class SentimentService : IMachineLearningService
             "MlModels/sentimentsensemodel.zip",
             out _
         );
-
         return model;
     }
 
+    public async Task<ITransformer> LoadModelRemotely()
+    {
+        var accessKey = Environment.GetEnvironmentVariable("AccessKey");
+        var secretKey = Environment.GetEnvironmentVariable("SecretKey");
+        
+        var config = new AmazonS3Config
+        {
+            ServiceURL = "https://nyc3.digitaloceanspaces.com",
+            UseHttp = true
+        };
+
+        var client = new AmazonS3Client
+        (
+            accessKey,
+            secretKey,
+            config
+        );
+
+        var objectResponse = await client.GetObjectAsync("sentimentsense-model", "sentimentsensemodel.zip");
+        
+        ITransformer model;
+        
+        if (objectResponse.HttpStatusCode != HttpStatusCode.OK)
+        {
+            model = _mlContext.Model.Load
+            (
+                "MlModels/sentimentsensemodel.zip",
+                out _
+            );
+
+            return model;
+        }
+        
+        var responseStream = objectResponse.ResponseStream;
+        model = _mlContext.Model.Load(responseStream, out _);
+        return model;
+    }
     public CalibratedBinaryClassificationMetrics EvaluateModel(ITransformer model, IDataView data)
     {
         var predictions = model.Transform(data);

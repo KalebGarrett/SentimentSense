@@ -26,26 +26,24 @@ public partial class Home
         F1Score = 0;
     }
     
-    private void AnalyzeText()
+    private async Task AnalyzeText()
     {
-        var trainingData = SentimentService.LoadFromTextFile().TrainSet;
-        var model = SentimentService.BuildAndTrainModel(trainingData);
+        var loadModelRemotely = await SentimentService.LoadModelRemotely();
 
-        var resultPrediction = SentimentService.UseModelWithSingleEntity(model, SentimentText);
+        var resultPrediction = SentimentService.UseModelWithSingleEntity(loadModelRemotely, SentimentText);
         Sentiment = resultPrediction.Prediction ? "Positive" : "Negative";
         Probability = resultPrediction.Probability * 100;
-  
         FullColor = resultPrediction.Prediction ? Color.Tertiary : Color.Secondary;
 
         var testData = SentimentService.LoadFromTextFile().TestSet;
-        var metrics = SentimentService.EvaluateModel(model, testData);
+        var metrics = SentimentService.EvaluateModel(loadModelRemotely, testData);
         Accuracy = metrics.Accuracy * 100;
         AreaUnderRocCurve = metrics.AreaUnderRocCurve * 100;
         F1Score = metrics.F1Score * 100;
-
+        
         Data = new[] {Convert.ToDouble(Accuracy), Convert.ToDouble(AreaUnderRocCurve), Convert.ToDouble(F1Score)};
     }
-
+    
     private void OnSelectedValue(Position value)
     {
         switch(value)

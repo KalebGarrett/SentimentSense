@@ -24,6 +24,7 @@
     </ItemGroup>
     
     <ItemGroup>
+      <PackageReference Include="AWSSDK.S3" Version="4.0.0-preview.2" />
       <PackageReference Include="Microsoft.ML" Version="4.0.0-preview.24271.1" />
       <PackageReference Include="MudBlazor" Version="7.4.0" />
     </ItemGroup>

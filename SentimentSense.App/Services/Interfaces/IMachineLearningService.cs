@@ -8,6 +8,7 @@ public interface IMachineLearningService
 {
     TrainTestData LoadFromTextFile();
     TrainTestData LoadFromEnumerable();
-    ITransformer BuildAndTrainModel(IDataView splitTrainSet);
+    ITransformer BuildOrLoadModelLocally(IDataView splitTrainSet);
+    Task<ITransformer> LoadModelRemotely();
     CalibratedBinaryClassificationMetrics EvaluateModel(ITransformer model, IDataView data);
 }

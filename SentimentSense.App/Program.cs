@@ -45,4 +45,9 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/MlModels"
 });
 
+var accessKey = builder.Configuration["EnvironmentVariables:AccessKey"];
+Environment.SetEnvironmentVariable("AccessKey", accessKey);
+var secretKey = builder.Configuration["EnvironmentVariables:SecretKey"];
+Environment.SetEnvironmentVariable("SecretKey", secretKey);
+
 app.Run();
