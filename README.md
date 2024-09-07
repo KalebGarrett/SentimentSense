@@ -17,7 +17,7 @@ A web app for analyzing and visualizing the sentiment of text data. Sentiment Se
 | **[ML.NET](https://github.com/dotnet/machinelearning)** | For implementing sentiment analysis models. |
 
 ### Link To Sentiment Sense
-[sentimentsense-2xudd.ondigitalocean.app](https://sentimentsense-2xudd.ondigitalocean.app)
+[https://sentimentsense-hm62w.ondigitalocean.app](https://sentimentsense-hm62w.ondigitalocean.app)
 
 ## Host Your Own Web App
 
